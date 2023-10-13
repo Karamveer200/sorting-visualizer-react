@@ -36,6 +36,10 @@
   letter-spacing: 2px;
 }
 
+p {
+  font-family: 'Montserrat', cursive;
+}
+
 html,
 body,
 #root {
@@ -148,26 +152,6 @@ body {
   }
 }
 
-.toastStyles {
-  margin-top: 50px !important;
-}
-
-.toastStyles > div {
-  margin-left: -80px !important;
-}
-
-@media screen and (max-width: 640px) {
-  .toastStyles {
-    margin-top: 100px !important;
-  }
-
-  .toastStyles {
-    width: 280px !important;
-    left: auto !important;
-    right: 1em !important;
-  }
-
-  .toastStyles > div {
-    margin-left: 0px !important;
-  }
+.chart_container {
+  height: calc(100% - 200px);
 }
