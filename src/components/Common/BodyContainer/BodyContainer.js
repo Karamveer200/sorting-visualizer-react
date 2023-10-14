@@ -51,7 +51,7 @@ const BodyContainer = ({ children, className, rootClassName }) => {
           </linearGradient>
         </defs>
       </svg>
-      <div className={`mx-auto max-w-[1400px] pt-10 px-8 h-full ${className}`}>{children}</div>
+      <div className={`mx-auto max-w-[1600px] pt-10 px-8 h-full ${className}`}>{children}</div>
     </div>
   );
 };

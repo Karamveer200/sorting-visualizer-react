@@ -1,21 +1,21 @@
-import React from 'react';
+import { getBarId } from '../../../utils/helperFunctions';
 
-const Bar = ({ item, index, barHeight, barWidth }) => {
+const Bar = ({ value, barColor, barHeight, barWidth, fixedIndex }) => {
   return (
     <div
-      className='bg-indigo-200 flex text-center items-center justify-center'
-      style={{ height: `${barHeight}px`, width: `${barWidth}px` }}
-    >
-      <p className='text-xl font-semibold' style={{ transform: 'rotate(180deg) scaleX(-1)' }}>
-        {item}
-      </p>
-    </div>
+      className='flex text-center items-center justify-center barHover'
+      style={{ height: `${barHeight}px`, width: `${barWidth}px`, backgroundColor: barColor }}
+      id={getBarId(fixedIndex)}
+      data-val={value}
+    ></div>
   );
 };
 
 const Bars = ({ dataArray, getContainerHeight = 100, getContainerWidth = 100 }) => {
-  const max = Math.max.apply(Math, dataArray);
-  const min = Math.min.apply(Math, dataArray);
+  const dataArrayValues = dataArray.map((item) => item.value);
+
+  const max = Math.max.apply(Math, dataArrayValues);
+  const min = Math.min.apply(Math, dataArrayValues);
 
   const HEIGHT_OFFSET = 40;
   const WIDTH_OFFSET = 20;
@@ -28,10 +28,22 @@ const Bars = ({ dataArray, getContainerHeight = 100, getContainerWidth = 100 }) 
       className='flex justify-stretch gap-[5px]'
       style={{ transform: 'rotate(180deg) scaleX(-1)', width: 'inherit' }}
     >
-      {dataArray.map((item, index) => {
-        const barHeight = (item - min) * scaleFactor + HEIGHT_OFFSET;
+      {dataArray.map((item) => {
+        const value = item.value;
+        const barHeight = (value - min) * scaleFactor + HEIGHT_OFFSET;
+        const barColor = item.color;
+        const fixedIndex = item.fixedIndex;
 
-        return <Bar item={item} barHeight={barHeight} barWidth={barWidth} index={index} key={index} />;
+        return (
+          <Bar
+            value={value}
+            barColor={barColor}
+            barHeight={barHeight}
+            barWidth={barWidth}
+            fixedIndex={fixedIndex}
+            key={fixedIndex}
+          />
+        );
       })}
     </div>
   );

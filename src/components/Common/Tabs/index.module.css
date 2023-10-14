@@ -37,7 +37,7 @@
 .selectedNavTitle:before,
 .hover_background:before,
 .hover_background_no_count:before {
-  border-radius: 10px;
+  border-radius: 5px;
   content: '';
   position: absolute;
   width: 100%;
@@ -52,7 +52,7 @@
 .selectedNavTitle:before,
 .hover_background:hover:before,
 .hover_background_no_count:hover:before {
-  border-radius: 10px;
+  border-radius: 5px;
   content: '';
   transform: scaleX(1);
   transform-origin: bottom left;
