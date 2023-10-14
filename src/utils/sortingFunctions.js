@@ -59,24 +59,41 @@ export const insertionSort = async (arr, setDataArray, delay) => {
 
   let i, key, j;
   for (i = 1; i < n; i++) {
+    const getCurrentNumElement = document.getElementById(getBarId(newArr[i].fixedIndex));
+    getCurrentNumElement.style.backgroundColor = colors.red;
+
     key = newArr[i].value;
     j = i - 1;
+
+    const getSecondNumElement = document.getElementById(getBarId(newArr[j].fixedIndex));
+    getSecondNumElement.style.backgroundColor = colors.red;
 
     /* Move elements of newArr[0..i-1], that are  
         greater than key, to one position ahead  
         of their current position */
     while (j >= 0 && newArr[j].value > key) {
-      const getFirstNumElement = document.getElementById(getBarId(newArr[j].fixedIndex));
-      const getSecondNumElement = document.getElementById(getBarId(newArr[j + 1].fixedIndex));
-      getFirstNumElement.style.backgroundColor = colors.red;
-      getSecondNumElement.style.backgroundColor = colors.red;
       await timer(delay);
 
+      // const getInnerFirstNumElement = document.getElementById(getBarId(newArr[j].fixedIndex));
+      // const getInnerSecondNumElement = document.getElementById(getBarId(newArr[j + 1].fixedIndex));
+
+      // getInnerFirstNumElement.style.backgroundColor = colors.red;
+      // getInnerSecondNumElement.style.backgroundColor = colors.red;
+
       newArr[j + 1].value = newArr[j].value;
+
       j = j - 1;
 
       setDataArray([...newArr]);
+
+      // getInnerFirstNumElement.style.backgroundColor = colors.green;
+      // getInnerSecondNumElement.style.backgroundColor = colors.green;
     }
+    // getSecondNumElement.style.backgroundColor = colors.green;
+    // getCurrentNumElement.style.backgroundColor = colors.green;
     newArr[j + 1].value = key;
+    setDataArray([...newArr]);
+
+    getSecondNumElement.style.backgroundColor = colors.green;
   }
 };

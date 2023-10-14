@@ -29,6 +29,7 @@ const Index = () => {
 
   useEffect(() => {
     const randomArray = generateRandomArray(arraySize);
+    // const randomArray = [8, 2, 4, 1, 3];
     setBaseArr(randomArray);
   }, [arraySize, currentAlgo]);
 
