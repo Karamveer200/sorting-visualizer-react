@@ -11,8 +11,12 @@ import { getBarId } from '../../utils/helperFunctions';
 import { BarSettingsContext } from '../../context/BarSettings';
 import Controls from './Controls';
 import { SORTING_SELECTION, ALGORITHM_TABS, ARRAY_KEYS } from '../../utils/constants';
+import pianoSound from '../../assets/piano.mp3';
+import { useAudioPlayer } from 'react-use-audio-player';
 
 const Index = () => {
+  const { load: loadSound, stop: stopSound } = useAudioPlayer();
+
   const [currentAlgo, setCurrentAlgo] = useState(ALGORITHM_TABS[0]);
 
   const { arraySize, delaySpeed } = useContext(BarSettingsContext);
@@ -21,6 +25,7 @@ const Index = () => {
   const [dataArray, setDataArray] = useState([]);
 
   const [squareRef, { width, height }] = useElementSize();
+  const [isAlgorithmRunning, setIsAlgorithmRunning] = useState(false);
 
   useEffect(() => {
     const randomArray = generateRandomArray(arraySize);
@@ -44,12 +49,28 @@ const Index = () => {
   }, [baseArr]);
 
   const onPlayClick = async () => {
+    setIsAlgorithmRunning(true);
+
+    // loadSound(pianoSound, {
+    //   format: 'mp3',
+    //   autoplay: true,
+    //   loop: true,
+    // });
+
     const speed = delaySpeed * 1000;
 
-    if (currentAlgo[ARRAY_KEYS.VALUE] === SORTING_SELECTION.BUBBLE_SORT)
-      await bubbleSort([...dataArray], setDataArray, speed);
+    switch (currentAlgo[ARRAY_KEYS.VALUE]) {
+      case SORTING_SELECTION.BUBBLE_SORT:
+        await bubbleSort([...dataArray], setDataArray, speed);
+        break;
+      case SORTING_SELECTION.INSERTION_SORT:
+        await insertionSort([...dataArray], setDataArray, speed);
+        break;
+      default:
+    }
 
-    console.log('finished');
+    stopSound();
+    setIsAlgorithmRunning(false);
   };
 
   return (
@@ -59,6 +80,7 @@ const Index = () => {
         setCurrentAlgo={setCurrentAlgo}
         tabs={ALGORITHM_TABS}
         onPlayClick={onPlayClick}
+        isPlayDisabled={isAlgorithmRunning}
       />
       <div className='lg:pt-0 chart_container'>
         <div

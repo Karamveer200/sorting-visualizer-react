@@ -1,7 +1,7 @@
 import React from 'react';
 import PageLevelTabs from '../Common/Tabs/PageLevelTabs';
 
-const Controls = ({ currentAlgo, setCurrentAlgo, tabs, onPlayClick }) => {
+const Controls = ({ currentAlgo, setCurrentAlgo, tabs, onPlayClick, isPlayDisabled }) => {
   return (
     <div>
       <PageLevelTabs
@@ -9,6 +9,7 @@ const Controls = ({ currentAlgo, setCurrentAlgo, tabs, onPlayClick }) => {
         setCurrentTab={setCurrentAlgo}
         tabs={tabs}
         onPlayClick={onPlayClick}
+        isPlayDisabled={isPlayDisabled}
       />
     </div>
   );

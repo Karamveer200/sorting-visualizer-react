@@ -53,25 +53,30 @@ export const bubbleSort = async (arr, setDataArray, delay) => {
   }
 };
 
-export const insertionSort = async (originalArray, setDataArray, delay) => {
-  const arr = [...originalArray];
-  const n = arr.length;
+export const insertionSort = async (arr, setDataArray, delay) => {
+  const newArr = [...arr];
+  const n = newArr.length;
 
   let i, key, j;
   for (i = 1; i < n; i++) {
-    key = arr[i];
+    key = newArr[i].value;
     j = i - 1;
 
-    /* Move elements of arr[0..i-1], that are  
+    /* Move elements of newArr[0..i-1], that are  
         greater than key, to one position ahead  
         of their current position */
-    while (j >= 0 && arr[j] > key) {
-      arr[j + 1] = arr[j];
+    while (j >= 0 && newArr[j].value > key) {
+      const getFirstNumElement = document.getElementById(getBarId(newArr[j].fixedIndex));
+      const getSecondNumElement = document.getElementById(getBarId(newArr[j + 1].fixedIndex));
+      getFirstNumElement.style.backgroundColor = colors.red;
+      getSecondNumElement.style.backgroundColor = colors.red;
+      await timer(delay);
+
+      newArr[j + 1].value = newArr[j].value;
       j = j - 1;
 
-      setDataArray([...arr]);
-      await timer(delay);
+      setDataArray([...newArr]);
     }
-    arr[j + 1] = key;
+    newArr[j + 1].value = key;
   }
 };

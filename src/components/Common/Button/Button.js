@@ -14,6 +14,12 @@ const BootstrapButton = styled(Button)({
   justifyContent: 'space-evenly',
   fontSize: 19,
   borderRadius: '10px',
+
+  '&:disabled': {
+    backgroundColor: '#22c55e',
+    color: 'black',
+    opacity: 0.7,
+  },
 });
 
 const ButtonWrapper = ({
@@ -22,6 +28,7 @@ const ButtonWrapper = ({
   isPlayBtn = false,
   allowFullWidth = false,
   onClick = () => {},
+  disabled,
 }) => {
   const handleClick = () => {
     onClick();
@@ -29,7 +36,7 @@ const ButtonWrapper = ({
 
   return (
     <div className={`flex-shrink-0 ${className} ${allowFullWidth && 'w-full'} `}>
-      <BootstrapButton variant='contained' onClick={handleClick}>
+      <BootstrapButton variant='contained' onClick={handleClick} disabled={disabled}>
         {isPlayBtn && (
           <div className=''>
             <PlayIcon className={`text-white ${classes.icon}`} aria-hidden='true' sx={{ width: 30 }} />

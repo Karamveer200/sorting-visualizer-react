@@ -2,7 +2,7 @@ import classes from './index.module.css';
 import { ARRAY_KEYS } from '../../../utils/constants';
 import Button from '../Button/Button';
 
-const PageLevelTabs = ({ tabs = [], currentTab = {}, setCurrentTab = () => {}, onPlayClick }) => {
+const PageLevelTabs = ({ tabs = [], currentTab = {}, setCurrentTab = () => {}, onPlayClick, isPlayDisabled }) => {
   const handleTabClick = (tab) => {
     setCurrentTab(tab);
   };
@@ -45,6 +45,7 @@ const PageLevelTabs = ({ tabs = [], currentTab = {}, setCurrentTab = () => {}, o
               onClick={onPlayClick}
               className={`w-full flex justify-center wheel-playBtn`}
               btnClassName='w-[100px] flex justify-center h-8 sm:h-10'
+              disabled={isPlayDisabled}
             />
           </div>
         </div>
